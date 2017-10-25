@@ -8,7 +8,7 @@ import { VendaService } from '../venda.service';
   styleUrls: ['./tab-venda.component.css']
 })
 export class TabVendaComponent implements OnInit {
-
+  titulo = "Relatório de Vendas";
   vendas: Venda[] = [];
   
     constructor(private service: VendaService) { }

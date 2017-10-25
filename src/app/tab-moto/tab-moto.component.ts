@@ -8,7 +8,7 @@ import { Moto } from "../moto";
   styleUrls: ['./tab-moto.component.css']
 })
 export class TabMotoComponent implements OnInit {
-
+  titulo = "Relatório Motos";
   motos: Moto[] = [];
 
   constructor(private service: MotoService) { }

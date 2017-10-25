@@ -15,8 +15,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
-  { path: 'motos', component: TabMotoComponent },
-  { path: 'vendas', component: TabVendaComponent}
+  { path: 'relatorio-motos', component: TabMotoComponent },
+  { path: 'relatorio-vendas', component: TabVendaComponent},
+  { path: 'cadastro-motos', component: FormCadMotoComponent },
+  { path: 'cadastro-vendas', component: FormCadVendaComponent},
+  { path: 'edicao-motos/:cod', component: FormCadMotoComponent }
 ];
 
 @NgModule({
