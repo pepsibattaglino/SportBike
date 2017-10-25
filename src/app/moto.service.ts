@@ -47,4 +47,13 @@ export class MotoService {
     }
   }
 
+  getMotoPorCodigo(codigo: number){
+    return (this.motos.find(moto => moto.codigo == codigo));
+  }
+
+  updateMoto(codigo: number, moto: Moto){
+    let indice = this.motos.indexOf(this.getMotoPorCodigo(codigo), 0);
+    this.motos[indice] = moto;
+  }
+
 }

@@ -10,8 +10,8 @@ export class VendaService {
   constructor() { }
 
   addVenda(venda){
+    venda.codigo = this.autoincrement++;
     this.vendas.push(venda);
-    this.autoincrement++;
   }
 
   getVendas(){
@@ -25,9 +25,13 @@ export class VendaService {
     }
   }
 
-  // atualizaVenda(codigo: number, venda: Venda){
-  //   let indice = this.vendas.indexOf(this.getProdutoPorCodigo(codigo), 0);
-  //   this.vendas[indice] = venda;
-  // }
+  getVendaPorCodigo(codigo: number){
+    return (this.vendas.find(venda => venda.codigo == codigo));
+  }
+
+  updateVenda(codigo: number, venda: Venda){
+    let indice = this.vendas.indexOf(this.getVendaPorCodigo(codigo), 0);
+    this.vendas[indice] = venda;
+  }
 
 }
