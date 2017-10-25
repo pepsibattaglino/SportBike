@@ -17,4 +17,8 @@ export class TabVendaComponent implements OnInit {
       this.vendas = this.service.getVendas();
     }
 
+    remover(venda: Venda){
+      this.service.removeVenda(venda);
+    }
+
 }

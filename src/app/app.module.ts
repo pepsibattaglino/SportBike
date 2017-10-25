@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'relatorio-vendas', component: TabVendaComponent},
   { path: 'cadastro-motos', component: FormCadMotoComponent },
   { path: 'cadastro-vendas', component: FormCadVendaComponent},
-  { path: 'edicao-motos/:cod', component: FormCadMotoComponent }
+  { path: 'edicao-motos/:cod', component: FormCadMotoComponent },
+  { path: 'edicao-vendas/:cod', component: FormCadVendaComponent }
 ];
 
 @NgModule({
