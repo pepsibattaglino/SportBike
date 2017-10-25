@@ -10,6 +10,13 @@ import { TabMotoComponent } from './tab-moto/tab-moto.component';
 import { TabVendaComponent } from './tab-venda/tab-venda.component';
 import { MotoService } from "./moto.service";
 import { VendaService } from './venda.service';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'list', pathMatch: 'full' },
+  { path: 'motos', component: TabMotoComponent },
+  { path: 'vendas', component: TabVendaComponent}
+];
 
 @NgModule({
   declarations: [
@@ -22,7 +29,8 @@ import { VendaService } from './venda.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [MotoService, VendaService],
   bootstrap: [AppComponent]
