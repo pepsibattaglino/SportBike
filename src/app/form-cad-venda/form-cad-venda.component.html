@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-sm-12">
+    <form>
+      <div class="form-group">
+        <label for="modelo">Modelo da moto:</label>
+        <select name="modelo" id="modelo" class="form-control" [(ngModel)]="venda.moto">
+          <option *ngFor="let m of motos" [ngValue]="m">
+            {{m.modelo}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="nomeCli">Nome do cliente:</label>
+        <input type="text" class="form-control" id="nomeCli" name="nomeCli" [(ngModel)]="venda.nomeCliente">
+      </div>
+      <div class="form-group">
+        <label for="cpfCli">CPF do cliente:</label>
+        <input type="text" class="form-control" id="cpfCli" name="cpfCli" [(ngModel)]="venda.cpfCliente">
+      </div>
+      <div class="form-group">
+        <label for="telefoneCli">Telefone do cliente:</label>
+        <input type="text" class="form-control" id="telefoneCli" name="telefoneCli" [(ngModel)]="venda.telefoneCliente">
+      </div>
+      <div class="buttons">
+        <input type="button" class="btn btn-primary" (click)="salvarVenda()" value="Salvar">
+        <input type="button" class="btn btn-default" (click)="limpar()" value="Cancelar">
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Marca</th>
+      <th>Cilindradas</th>
+      <th>Preço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let moto of motos">
+      <td>{{moto.modelo}}</td>
+      <td>{{moto.marca}}</td>
+      <td>{{moto.cilindradas}}</td>
+      <td>{{moto.preco}}</td>
+    </tr>
+  </tbody>
+</table>
