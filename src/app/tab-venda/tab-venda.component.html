@@ -1,24 +1,28 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Modelo da moto:</th>
-      <th>Nome do cliente:</th>
-      <th>CPF do cliente:</th>
-      <th>Telefone do cliente</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let venda of vendas">
-      <td>{{venda.codigo}}</td>
-      <td>{{venda.moto.modelo}}</td>
-      <td>{{venda.nomeCliente}}</td>
-      <td>{{venda.cpfCliente}}</td>
-      <td>{{venda.telefoneCliente}}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="page-header">
+  <h1>{{titulo}}</h1>
+</div>
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Modelo da moto:</th>
+        <th>Nome do cliente:</th>
+        <th>CPF do cliente:</th>
+        <th>Telefone do cliente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let venda of vendas">
+        <td>{{venda.codigo}}</td>
+        <td>{{venda.moto.modelo}}</td>
+        <td>{{venda.nomeCliente}}</td>
+        <td>{{venda.cpfCliente}}</td>
+        <td>{{venda.telefoneCliente}}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<option *ngFor="let m of motos" [ngValue]="m">
-  {{m.modelo}}
-</option>
-<app-form-cad-venda></app-form-cad-venda>
+  <option *ngFor="let m of motos" [ngValue]="m">
+    {{m.modelo}}
+  </option>
+</div>
