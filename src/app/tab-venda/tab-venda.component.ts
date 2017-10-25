@@ -10,15 +10,15 @@ import { VendaService } from '../venda.service';
 export class TabVendaComponent implements OnInit {
   titulo = "Relatório de Vendas";
   vendas: Venda[] = [];
-  
-    constructor(private service: VendaService) { }
-  
-    ngOnInit() {
-      this.vendas = this.service.getVendas();
-    }
 
-    remover(venda: Venda){
-      this.service.removeVenda(venda);
-    }
+  constructor(private service: VendaService) { }
+
+  ngOnInit() {
+    this.vendas = this.service.getVendas();
+  }
+
+  remover(venda: Venda) {
+    this.service.removeVenda(venda);
+  }
 
 }
