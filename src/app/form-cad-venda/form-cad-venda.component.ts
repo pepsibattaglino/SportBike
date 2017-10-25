@@ -21,8 +21,7 @@ export class FormCadVendaComponent implements OnInit {
   ngOnInit() {
     this.codigo = this.rota.snapshot.params['cod'];
     if (isNaN(this.codigo)) {
-      this.venda = new Venda()
-      this.motos = this.motoService.getMotos();
+      this.venda = new Venda();
     } else {
       this.venda = Object.assign({}, this.vendaService.getVendaPorCodigo(this.codigo));
     }
