@@ -44,4 +44,8 @@ export class FormCadVendaComponent implements OnInit {
     this.motos = this.motoService.getMotos();
   }
 
+  limpar(){
+    this.venda = new Venda();
+  }
+
 }
