@@ -10,7 +10,7 @@ import { MotoService } from "../moto.service";
   styleUrls: ['./form-cad-venda.component.css']
 })
 export class FormCadVendaComponent implements OnInit {
-
+  titulo = "Realizar Venda";
   venda: Venda;
   motos: Moto[]=[];  
   

@@ -8,7 +8,7 @@ import { MotoService } from "../moto.service";
   styleUrls: ['./form-cad-moto.component.css']
 })
 export class FormCadMotoComponent implements OnInit {
-
+  titulo = "Cadastrar Moto";
   moto: Moto;
 
   constructor(private service:MotoService) { }
