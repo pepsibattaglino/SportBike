@@ -1,6 +1,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Cógido</th>
       <th>Modelo</th>
       <th>Marca</th>
       <th>Cilindradas</th>
@@ -9,6 +10,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let moto of motos">
+      <td>{{moto.codigo}}</td>
       <td>{{moto.modelo}}</td>
       <td>{{moto.marca}}</td>
       <td>{{moto.cilindradas}}</td>

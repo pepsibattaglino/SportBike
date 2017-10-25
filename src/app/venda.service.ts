@@ -18,7 +18,7 @@ export class VendaService {
     return this.vendas;
   }
 
-  removerVenda(venda: Venda){
+  removeVenda(venda: Venda){
     let indice = this.vendas.indexOf(venda, 0);
     if (indice > -1) {
       this.vendas.splice(indice, 1);
