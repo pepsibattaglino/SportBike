@@ -11,6 +11,7 @@ import { TabVendaComponent } from './tab-venda/tab-venda.component';
 import { MotoService } from './moto.service';
 import { VendaService } from './venda.service';
 import { RouterModule, Routes } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const routes: Routes = [
     FormCadMotoComponent,
     FormCadVendaComponent,
     TabMotoComponent,
-    TabVendaComponent
+    TabVendaComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
