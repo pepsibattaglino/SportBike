@@ -9,6 +9,8 @@
         <th>Nome do cliente:</th>
         <th>CPF do cliente:</th>
         <th>Telefone do cliente</th>
+        <th>Editar</th>
+        <th>Excluir</th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +20,16 @@
         <td>{{venda.nomeCliente}}</td>
         <td>{{venda.cpfCliente}}</td>
         <td>{{venda.telefoneCliente}}</td>
+        <td>
+            <button class="btn btn-info btn-sm" data-title="Edit" [routerLink]="['/edicao-vendas', venda.codigo]">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" data-title="Delete" routerLink="/relatorio-vendas" (click)="remover(venda)">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </td>
       </tr>
     </tbody>
   </table>

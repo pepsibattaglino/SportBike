@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Moto } from "../moto";
 import { MotoService } from "../moto.service";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-form-cad-moto',
@@ -10,17 +11,27 @@ import { MotoService } from "../moto.service";
 export class FormCadMotoComponent implements OnInit {
   titulo = "Cadastrar Moto";
   moto: Moto;
+  codigo: number;
 
-  constructor(private service:MotoService) { }
+  constructor(private service:MotoService, private router:Router, private rota:ActivatedRoute) { }
 
   ngOnInit() {
-    this.moto = new Moto();
+    this.codigo = this.rota.snapshot.params['cod'];
+    if (isNaN(this.codigo)) {
+      this.moto = new Moto();  
+    } else {
+      this.moto = Object.assign({}, this.service.getMotoPorCodigo(this.codigo));
+    }
   }
 
   salvarMoto(){
-    this.service.addMoto(this.moto);
-    this.limpar();
-    // this.router.navigate(['/tabela']);
+    if (isNaN(this.codigo)) {
+      this.service.addMoto(this.moto);
+      this.limpar();  
+    } else {
+      this.service.updateMoto(this.codigo, this.moto);
+    }
+    this.router.navigate(['/relatorio-motos']);
   }
 
   limpar(){

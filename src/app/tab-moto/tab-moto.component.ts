@@ -17,4 +17,8 @@ export class TabMotoComponent implements OnInit {
     this.motos = this.service.getMotos();
   }
 
+  remover(moto: Moto){
+    this.service.removeMotos(moto);
+  }
+
 }
