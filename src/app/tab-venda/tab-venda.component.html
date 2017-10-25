@@ -1,22 +1,23 @@
 <table class="table">
-    <thead>
-      <tr>
-        <th>Modelo da moto:</th>
-        <th>Nome do cliente:</th>
-        <th>CPF do cliente:</th>
-        <th>Telefone do cliente</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let venda of vendas">
-        <td >{{venda.moto.modelo}}</td>
-        <td>{{venda.nomeCliente}}</td>
-        <td>{{venda.cpfCliente}}</td>
-        <td>{{venda.telefoneCliente}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>Modelo da moto:</th>
+      <th>Nome do cliente:</th>
+      <th>CPF do cliente:</th>
+      <th>Telefone do cliente</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let venda of vendas">
+      <td>{{venda.moto.modelo}}</td>
+      <td>{{venda.nomeCliente}}</td>
+      <td>{{venda.cpfCliente}}</td>
+      <td>{{venda.telefoneCliente}}</td>
+    </tr>
+  </tbody>
+</table>
 
-  <option *ngFor="let m of motos" [ngValue]="m">
-      {{m.modelo}}
-    </option>
+<option *ngFor="let m of motos" [ngValue]="m">
+  {{m.modelo}}
+</option>
+<app-form-cad-venda></app-form-cad-venda>

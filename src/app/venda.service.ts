@@ -25,9 +25,9 @@ export class VendaService {
     }
   }
 
-  atualizaVenda(codigo: number, venda: Venda){
-    let indice = this.vendas.indexOf(this.getProdutoPorCodigo(codigo), 0);
-    this.vendas[indice] = venda;
-  }
+  // atualizaVenda(codigo: number, venda: Venda){
+  //   let indice = this.vendas.indexOf(this.getProdutoPorCodigo(codigo), 0);
+  //   this.vendas[indice] = venda;
+  // }
 
 }
