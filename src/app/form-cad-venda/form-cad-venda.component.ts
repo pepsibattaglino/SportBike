@@ -95,10 +95,13 @@ export class FormCadVendaComponent implements OnInit {
 
   inicializarVenda(){
     this.venda = new Venda();
-    // this.motos = this.motoService.getMotos().subscribe(
-    //   data => { this.limpar(); },
-    //   erro => { console.log(erro); }
-    // );
+    this.motoService.getMotos().subscribe(
+      data => {
+        this.motos = data;
+        this.limpar(); 
+      },
+      erro => { console.log(erro); }
+    );
   }
 
   limpar(){

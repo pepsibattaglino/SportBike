@@ -49,7 +49,7 @@ export class VendaService {
 
   // autoincrement = 1;
   vendas: Venda[]=[];
-  uri = "http://localhost:8080/SportBike_back/webresources/vendas/";
+  uri = "http://localhost:8080/vendas/all";
 
   constructor(private http: Http) { }
 

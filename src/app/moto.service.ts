@@ -71,7 +71,7 @@ export class MotoService {
 
   // autoincrement = 4;//porque já tem 3 no array
   motos: Moto[] = [];
-  uri = "http://localhost:8080/SportBike_back/webresources/motos/";
+  uri = "http://localhost:8080/motos";
   
   constructor(private http: Http) { 
   }
@@ -87,7 +87,8 @@ export class MotoService {
   }
 
   getMotos():Observable<Moto[]>{
-    return this.http.get(this.uri)
+    let uriGet = this.uri +"/all";
+    return this.http.get(uriGet)
     .map((res:Response)=>res.json())
     .catch((erro:any) => Observable.throw(erro));
   }
