@@ -1,21 +1,71 @@
+// import { Injectable } from '@angular/core';
+// import { Venda } from "./venda";
+
+// @Injectable()
+// export class VendaService {
+
+//   autoincrement = 1;
+//   vendas: Venda[]=[];
+
+//   constructor() { }
+
+//   addVenda(venda){
+//     venda.codigo = this.autoincrement++;
+//     this.vendas.push(venda);
+//   }
+
+//   getVendas(){
+//     return this.vendas;
+//   }
+
+//   removeVenda(venda: Venda){
+//     let indice = this.vendas.indexOf(venda, 0);
+//     if (indice > -1) {
+//       this.vendas.splice(indice, 1);
+//     }
+//   }
+
+//   getVendaPorCodigo(codigo: number){
+//     return (this.vendas.find(venda => venda.codigo == codigo));
+//   }
+
+//   updateVenda(codigo: number, venda: Venda){
+//     let indice = this.vendas.indexOf(this.getVendaPorCodigo(codigo), 0);
+//     this.vendas[indice] = venda;
+//   }
+
+// }
+
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Venda } from "./venda";
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import { Observable } from "rxjs/RX";
 
 @Injectable()
 export class VendaService {
 
-  autoincrement = 1;
+  // autoincrement = 1;
   vendas: Venda[]=[];
+  uri = "http://localhost:8080/SportBike_back/webresources/vendas/";
 
-  constructor() { }
+  constructor(private http: Http) { }
 
-  addVenda(venda){
-    venda.codigo = this.autoincrement++;
-    this.vendas.push(venda);
+  addVenda(venda:Venda):Observable<Venda>{
+    let bodyString = JSON.stringify(venda);
+    let cabecalho = new Headers({'Content-Type':'application/json'});
+    let options = new RequestOptions({headers:cabecalho});
+    return this.http.post(this.uri, bodyString, options)
+      .map((res:Response) => {})
+      .catch((erro:any) => Observable.throw(erro));
   }
 
-  getVendas(){
-    return this.vendas;
+  getVendas():Observable<Venda[]>{
+    return this.http.get(this.uri)
+      .map((res:Response)=>res.json())
+      .catch((erro:any) => Observable.throw(erro));    
   }
 
   removeVenda(venda: Venda){
@@ -35,3 +85,40 @@ export class VendaService {
   }
 
 }
+
+
+// *************************************************************
+// import { Injectable } from '@angular/core';
+// import { Http, Response, Headers, RequestOptions } from '@angular/http';
+// import { Motor } from "./motor";
+
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/catch';
+// import { Observable } from "rxjs/RX";
+
+// @Injectable()
+// export class MotorService {
+//   motores: Motor[] = [];
+//   uri = "http://localhost:8080/CadastroMotores/api/motores";
+
+//   constructor(private http: Http) { 
+//   }
+
+//   getMotores():Observable<Motor[]>{
+//     return this.http.get(this.uri)
+//       .map((res:Response)=>res.json())
+//       .catch((erro:any) => Observable.throw(erro));
+      
+//   }
+
+//   adicionarMotor(motor:Motor):Observable<Motor>{
+//     let bodyString = JSON.stringify(motor);
+//     let cabecalho = new Headers({'Content-Type':'application/json'});
+//     let options = new RequestOptions({headers:cabecalho});
+//     return this.http.post(this.uri, bodyString, options)
+//       .map((res:Response) => {})
+//       .catch((erro:any) => Observable.throw(erro));
+
+//   }
+
+// }
