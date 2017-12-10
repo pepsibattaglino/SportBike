@@ -61,13 +61,23 @@ export class FormCadMotoComponent implements OnInit {
   constructor(private service:MotoService, private router:Router, private rota:ActivatedRoute) { }
 
   ngOnInit() {
+    // this.codigo = this.rota.snapshot.params['cod'];
+    // if (isNaN(this.codigo)) {
+    //   this.moto = new Moto();  
+    // } else {
+    //   this.moto = Object.assign({}, this.service.getMotoPorCodigo(this.codigo));
+    // }
     this.codigo = this.rota.snapshot.params['cod'];
-    if (isNaN(this.codigo)) {
-      this.moto = new Moto();  
-    } else {
-      this.moto = Object.assign({}, this.service.getMotoPorCodigo(this.codigo));
-    }
+    
+          if (isNaN(this.codigo)) {
+                this.moto = new Moto();
+          } else {
+                this.service.getMotoPorCodigo(this.codigo).subscribe(moto => {
+                      this.moto = moto;
+                });
+          }
   }
+  
 
   salvarMoto(){
     

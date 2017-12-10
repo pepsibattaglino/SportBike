@@ -1,3 +1,67 @@
+// =================== versão final ===========================
+import { Injectable } from '@angular/core';
+import { Moto } from './moto';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import { Observable } from "rxjs/RX";
+
+@Injectable()
+export class MotoService {
+
+  // autoincrement = 4;//porque já tem 3 no array
+  motos: Moto[] = [];
+  uri = "http://localhost:8080/motos";
+  
+  constructor(private http: Http) { 
+  }
+  
+  addMoto(moto:Moto):Observable<Moto>{
+    let bodyString = JSON.stringify(moto);
+    let cabecalho = new Headers({'Content-Type':'application/json'});
+    let options = new RequestOptions({headers:cabecalho});
+    return this.http.post(this.uri, bodyString, options)
+      .map((res:Response) => {})
+      .catch((erro:any) => Observable.throw(erro));
+  }
+
+  getMotos():Observable<Moto[]>{
+    let uriGet = this.uri +"/all";
+    return this.http.get(uriGet)
+    .map((res:Response)=>res.json())
+    .catch((erro:any) => Observable.throw(erro));
+  }
+
+  getMotoPorCodigo(codigo: number): Observable<Moto> {
+    return this.http.get(this.uri+codigo)
+    .map((res: Response)=> res.json())
+    .catch((erro:any)=>Observable.throw(erro));
+  }
+
+  updateMoto(codigo: number, moto: Moto): Observable<Moto> {
+    // let indice = this.motos.indexOf(this.getMotoPorCodigo(codigo), 0);
+    // this.motos[indice] = moto;
+    return this.http.put(this.uri+codigo, moto)
+    .map((res:Response)=> {})
+    .catch((erro:any)=>Observable.throw(erro))
+  }
+
+  removeMotos(moto: Moto): Observable<Moto>{
+    // let indice = this.motos.indexOf(moto, 0);
+    // if (indice > -1) {
+    //   this.motos.splice(indice, 1);
+    // }
+    return this.http.delete(this.uri+moto.codigo)
+    .map((res:Response)=> {})
+    .catch((erro:any)=>Observable.throw(erro))
+  }
+
+}
+
+
+
+// =================== versão 1 ===========================
 // import { Injectable } from '@angular/core';
 // import { Moto } from './moto';
 
@@ -58,60 +122,65 @@
 
 // }
 
-import { Injectable } from '@angular/core';
-import { Moto } from './moto';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { Observable } from "rxjs/RX";
 
-@Injectable()
-export class MotoService {
+// =================== versão 2(corrigida pelo professor) ===========================
+// import { Injectable } from '@angular/core';
+// import { Moto } from './moto';
+// import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
-  // autoincrement = 4;//porque já tem 3 no array
-  motos: Moto[] = [];
-  uri = "http://localhost:8080/motos";
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/catch';
+// import { Observable } from "rxjs/RX";
+
+// @Injectable()
+// export class MotoService {
+
+//   // autoincrement = 4;//porque já tem 3 no array
+//   motos: Moto[] = [];
+//   uri = "http://localhost:8080/motos";
   
-  constructor(private http: Http) { 
-  }
+//   constructor(private http: Http) { 
+//   }
   
-  addMoto(moto:Moto):Observable<Moto>{
-    let bodyString = JSON.stringify(moto);
-    let cabecalho = new Headers({'Content-Type':'application/json'});
-    let options = new RequestOptions({headers:cabecalho});
-    return this.http.post(this.uri, bodyString, options)
-      .map((res:Response) => {})
-      .catch((erro:any) => Observable.throw(erro));
+//   addMoto(moto:Moto):Observable<Moto>{
+//     let bodyString = JSON.stringify(moto);
+//     let cabecalho = new Headers({'Content-Type':'application/json'});
+//     let options = new RequestOptions({headers:cabecalho});
+//     return this.http.post(this.uri, bodyString, options)
+//       .map((res:Response) => {})
+//       .catch((erro:any) => Observable.throw(erro));
 
-  }
+//   }
 
-  getMotos():Observable<Moto[]>{
-    let uriGet = this.uri +"/all";
-    return this.http.get(uriGet)
-    .map((res:Response)=>res.json())
-    .catch((erro:any) => Observable.throw(erro));
-  }
+//   getMotos():Observable<Moto[]>{
+//     let uriGet = this.uri +"/all";
+//     return this.http.get(uriGet)
+//     .map((res:Response)=>res.json())
+//     .catch((erro:any) => Observable.throw(erro));
+//   }
 
-  removeMotos(moto: Moto){
-    let indice = this.motos.indexOf(moto, 0);
-    if (indice > -1) {
-      this.motos.splice(indice, 1);
-    }
-  }
+//   removeMotos(moto: Moto){
+//     let indice = this.motos.indexOf(moto, 0);
+//     if (indice > -1) {
+//       this.motos.splice(indice, 1);
+//     }
+//   }
 
-  getMotoPorCodigo(codigo: number){
-    return (this.motos.find(moto => moto.codigo == codigo));
-  }
+//   getMotoPorCodigo(codigo: number){
+//     return (this.motos.find(moto => moto.codigo == codigo));
+//   }
 
-  updateMoto(codigo: number, moto: Moto){
-    let indice = this.motos.indexOf(this.getMotoPorCodigo(codigo), 0);
-    this.motos[indice] = moto;
-  }
+//   updateMoto(codigo: number, moto: Moto){
+//     let indice = this.motos.indexOf(this.getMotoPorCodigo(codigo), 0);
+//     this.motos[indice] = moto;
+//   }
 
-}
+// }
 
-// *************************************************************
+
+
+// =================== versão teste ===========================
 // import { Injectable } from '@angular/core';
 // import { Http, Response, Headers, RequestOptions } from '@angular/http';
 // import { Motor } from "./motor";

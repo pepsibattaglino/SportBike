@@ -1,3 +1,64 @@
+//================================ versão final ====================================
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Venda } from "./venda";
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import { Observable } from "rxjs/RX";
+
+@Injectable()
+export class VendaService {
+
+  // autoincrement = 1;
+  vendas: Venda[]=[];
+  uri = "http://localhost:8080/vendas";
+
+  constructor(private http: Http) { }
+
+  addVenda(venda:Venda):Observable<Venda>{
+    let bodyString = JSON.stringify(venda);
+    let cabecalho = new Headers({'Content-Type':'application/json'});
+    let options = new RequestOptions({headers:cabecalho});
+    return this.http.post(this.uri, bodyString, options)
+      .map((res:Response) => {})
+      .catch((erro:any) => Observable.throw(erro));
+  }
+
+  getVendas():Observable<Venda[]>{
+    return this.http.get(this.uri)
+      .map((res:Response)=>res.json())
+      .catch((erro:any) => Observable.throw(erro));    
+  }
+
+  getVendaPorCodigo(codigo: number): Observable<Venda>{
+    // return (this.vendas.find(venda => venda.codigo == codigo));
+    return this.http.get(this.uri+codigo)
+    .map((res: Response)=> res.json())
+    .catch((erro:any)=>Observable.throw(erro));
+  }
+
+  updateVenda(codigo: number, venda: Venda): Observable<Venda>{
+    // let indice = this.vendas.indexOf(this.getVendaPorCodigo(codigo), 0);
+    // this.vendas[indice] = venda;
+    return this.http.put(this.uri+codigo, venda)
+    .map((res:Response)=> {})
+    .catch((erro:any)=>Observable.throw(erro))
+  }
+
+  removeVenda(venda: Venda): Observable<Venda>{
+    // let indice = this.vendas.indexOf(venda, 0);
+    // if (indice > -1) {
+    //   this.vendas.splice(indice, 1);
+    // }
+    return this.http.delete(this.uri+venda.codigo)
+    .map((res:Response)=> {})
+    .catch((erro:any)=>Observable.throw(erro))
+  }
+
+}
+
+//================================ versão 1 ====================================
 // import { Injectable } from '@angular/core';
 // import { Venda } from "./venda";
 
@@ -36,58 +97,7 @@
 
 // }
 
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Venda } from "./venda";
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { Observable } from "rxjs/RX";
-
-@Injectable()
-export class VendaService {
-
-  // autoincrement = 1;
-  vendas: Venda[]=[];
-  uri = "http://localhost:8080/vendas/all";
-
-  constructor(private http: Http) { }
-
-  addVenda(venda:Venda):Observable<Venda>{
-    let bodyString = JSON.stringify(venda);
-    let cabecalho = new Headers({'Content-Type':'application/json'});
-    let options = new RequestOptions({headers:cabecalho});
-    return this.http.post(this.uri, bodyString, options)
-      .map((res:Response) => {})
-      .catch((erro:any) => Observable.throw(erro));
-  }
-
-  getVendas():Observable<Venda[]>{
-    return this.http.get(this.uri)
-      .map((res:Response)=>res.json())
-      .catch((erro:any) => Observable.throw(erro));    
-  }
-
-  removeVenda(venda: Venda){
-    let indice = this.vendas.indexOf(venda, 0);
-    if (indice > -1) {
-      this.vendas.splice(indice, 1);
-    }
-  }
-
-  getVendaPorCodigo(codigo: number){
-    return (this.vendas.find(venda => venda.codigo == codigo));
-  }
-
-  updateVenda(codigo: number, venda: Venda){
-    let indice = this.vendas.indexOf(this.getVendaPorCodigo(codigo), 0);
-    this.vendas[indice] = venda;
-  }
-
-}
-
-
-// *************************************************************
+//================================ versão teste ====================================
 // import { Injectable } from '@angular/core';
 // import { Http, Response, Headers, RequestOptions } from '@angular/http';
 // import { Motor } from "./motor";
