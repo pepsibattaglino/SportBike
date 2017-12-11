@@ -74,11 +74,12 @@ export class FormCadVendaComponent implements OnInit {
     if (isNaN(this.codigo)) {
       this.venda = new Venda();
     } else {
-      this.venda = new Venda();
+      this.vendaService.getVendaPorCodigo(this.codigo).subscribe(venda => { this.venda = venda;})
     }
 
     this.inicializarVenda();
   }
+
 
   salvarVenda(){
     if (isNaN(this.codigo)) {

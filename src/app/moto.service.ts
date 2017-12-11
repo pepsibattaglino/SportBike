@@ -21,7 +21,7 @@ export class MotoService {
     let bodyString = JSON.stringify(moto);
     let cabecalho = new Headers({'Content-Type':'application/json'});
     let options = new RequestOptions({headers:cabecalho});
-    return this.http.post(this.uri, bodyString, options)
+    return this.http.post(this.uri+"/create", bodyString, options)
       .map((res:Response) => {})
       .catch((erro:any) => Observable.throw(erro));
   }
@@ -34,7 +34,9 @@ export class MotoService {
   }
 
   getMotoPorCodigo(codigo: number): Observable<Moto> {
-    return this.http.get(this.uri+codigo)
+    let uriGetCod = this.uri +"/find/"+codigo;
+    console.log("######################", uriGetCod);
+    return this.http.get(uriGetCod)
     .map((res: Response)=> res.json())
     .catch((erro:any)=>Observable.throw(erro));
   }
@@ -42,20 +44,22 @@ export class MotoService {
   updateMoto(codigo: number, moto: Moto): Observable<Moto> {
     // let indice = this.motos.indexOf(this.getMotoPorCodigo(codigo), 0);
     // this.motos[indice] = moto;
-    return this.http.put(this.uri+codigo, moto)
+    let uriUp = this.uri +"/update/"+codigo;
+    return this.http.put(uriUp, moto)
     .map((res:Response)=> {})
     .catch((erro:any)=>Observable.throw(erro))
   }
 
   removeMotos(moto: Moto): Observable<Moto>{
-    // let indice = this.motos.indexOf(moto, 0);
-    // if (indice > -1) {
-    //   this.motos.splice(indice, 1);
-    // }
-    return this.http.delete(this.uri+moto.codigo)
-    .map((res:Response)=> {})
-    .catch((erro:any)=>Observable.throw(erro))
+    let uriDel = this.uri +"/delete/"+moto.codigo;
+    console.log("***********************", uriDel)
+    return this.http.delete(uriDel)
+    .map((res:Response)=>res.json())
+    .catch((erro:any) => Observable.throw(erro));
+    // .map((res:Response)=> {})
+    // .catch((erro:any)=>Observable.throw(erro))
   }
+
 
 }
 
