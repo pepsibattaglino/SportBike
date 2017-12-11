@@ -17,6 +17,7 @@ export class VendaService {
 
   addVenda(venda:Venda):Observable<Venda>{
     let bodyString = JSON.stringify(venda);
+    console.log(bodyString)
     let cabecalho = new Headers({'Content-Type':'application/json'});
     let options = new RequestOptions({headers:cabecalho});
     return this.http.post(this.uri + "/create", bodyString, options)
