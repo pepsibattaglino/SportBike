@@ -10,7 +10,6 @@ import { Observable } from "rxjs/RX";
 @Injectable()
 export class MotoService {
 
-  // autoincrement = 4;//porque já tem 3 no array
   motos: Moto[] = [];
   uri = "http://localhost:8080/motos";
   
@@ -42,12 +41,10 @@ export class MotoService {
   }
 
   updateMoto(codigo: number, moto: Moto): Observable<Moto> {
-    // let indice = this.motos.indexOf(this.getMotoPorCodigo(codigo), 0);
-    // this.motos[indice] = moto;
     let uriUp = this.uri +"/update/"+codigo;
     return this.http.put(uriUp, moto)
-    .map((res:Response)=> {})
-    .catch((erro:any)=>Observable.throw(erro))
+      .map((res:Response)=> {})
+      .catch((erro:any)=>Observable.throw(erro))
   }
 
   removeMotos(moto: Moto): Observable<Moto>{
@@ -56,10 +53,7 @@ export class MotoService {
     return this.http.delete(uriDel)
     .map((res:Response)=>res.json())
     .catch((erro:any) => Observable.throw(erro));
-    // .map((res:Response)=> {})
-    // .catch((erro:any)=>Observable.throw(erro))
   }
-
 
 }
 

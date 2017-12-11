@@ -61,16 +61,12 @@ export class FormCadMotoComponent implements OnInit {
   constructor(private service:MotoService, private router:Router, private rota:ActivatedRoute) { }
 
   ngOnInit() {
-    // this.codigo = this.rota.snapshot.params['cod'];
-    // if (isNaN(this.codigo)) {
-    //   this.moto = new Moto();  
-    // } else {
-    //   this.moto = Object.assign({}, this.service.getMotoPorCodigo(this.codigo));
-    // }
     this.codigo = this.rota.snapshot.params['cod'];    
+    
     if (isNaN(this.codigo)) {
       this.moto = new Moto();
     } else {
+      this.moto = new Moto();
       this.service.getMotoPorCodigo(this.codigo).subscribe(moto => { this.moto = moto;});
     }
   }
@@ -78,12 +74,18 @@ export class FormCadMotoComponent implements OnInit {
   salvarMoto(){
     if (isNaN(this.codigo)) {
       this.service.addMoto(this.moto).subscribe(
-        data => { this.limpar(); },
+        data => { 
+          this.limpar(); 
+          this.router.navigate(['/relatorio-motos']); 
+        },
         erro => { console.log(erro); }
       );
       this.limpar();  
     } else {
-      this.service.updateMoto(this.codigo, this.moto);
+      this.service.updateMoto(this.codigo, this.moto).subscribe(
+        data => { this.limpar(); },
+        erro => { console.log(erro); }
+      );
     }
     this.router.navigate(['/relatorio-motos']);
   }
