@@ -62,7 +62,6 @@ export class FormCadMotoComponent implements OnInit {
 
   ngOnInit() {
     this.codigo = this.rota.snapshot.params['cod'];    
-    
     if (isNaN(this.codigo)) {
       this.moto = new Moto();
     } else {
