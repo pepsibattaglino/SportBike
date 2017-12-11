@@ -20,13 +20,15 @@ export class VendaService {
     let bodyString = JSON.stringify(venda);
     let cabecalho = new Headers({'Content-Type':'application/json'});
     let options = new RequestOptions({headers:cabecalho});
-    return this.http.post(this.uri, bodyString, options)
+    return this.http.post(this.uri+"/create", bodyString, options)
       .map((res:Response) => {})
       .catch((erro:any) => Observable.throw(erro));
   }
 
   getVendas():Observable<Venda[]>{
-    return this.http.get(this.uri)
+    let uriGet = this.uri +"/all";
+    console.log(uriGet);
+    return this.http.get(uriGet)
       .map((res:Response)=>res.json())
       .catch((erro:any) => Observable.throw(erro));    
   }
