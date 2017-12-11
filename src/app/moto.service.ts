@@ -20,39 +20,41 @@ export class MotoService {
     let bodyString = JSON.stringify(moto);
     let cabecalho = new Headers({'Content-Type':'application/json'});
     let options = new RequestOptions({headers:cabecalho});
-    return this.http.post(this.uri+"/create", bodyString, options)
+    return this.http.post(this.uri + "/create", bodyString, options)
       .map((res:Response) => {})
       .catch((erro:any) => Observable.throw(erro));
   }
 
   getMotos():Observable<Moto[]>{
-    let uriGet = this.uri +"/all";
+    let uriGet = this.uri + "/all";
+    console.log(uriGet);
     return this.http.get(uriGet)
-    .map((res:Response)=>res.json())
-    .catch((erro:any) => Observable.throw(erro));
+      .map((res:Response)=>res.json())
+      .catch((erro:any) => Observable.throw(erro));
   }
 
   getMotoPorCodigo(codigo: number): Observable<Moto> {
-    let uriGetCod = this.uri +"/find/"+codigo;
-    console.log("######################", uriGetCod);
+    let uriGetCod = this.uri + "/find/" + codigo;
+    console.log(uriGetCod);
     return this.http.get(uriGetCod)
-    .map((res: Response)=> res.json())
-    .catch((erro:any)=>Observable.throw(erro));
+      .map((res: Response)=> res.json())
+      .catch((erro:any)=>Observable.throw(erro));
   }
 
   updateMoto(codigo: number, moto: Moto): Observable<Moto> {
-    let uriUp = this.uri +"/update/"+codigo;
+    let uriUp = this.uri + "/update/" + codigo;
+    console.log(uriUp);
     return this.http.put(uriUp, moto)
       .map((res:Response)=> {})
       .catch((erro:any)=>Observable.throw(erro))
   }
 
   removeMotos(moto: Moto): Observable<Moto>{
-    let uriDel = this.uri +"/delete/"+moto.codigo;
-    console.log("***********************", uriDel)
+    let uriDel = this.uri + "/delete/" + moto.codigo;
+    console.log(uriDel);
     return this.http.delete(uriDel)
-    .map((res:Response)=>res.json())
-    .catch((erro:any) => Observable.throw(erro));
+      .map((res:Response)=>res.json())
+      .catch((erro:any) => Observable.throw(erro));
   }
 
 }

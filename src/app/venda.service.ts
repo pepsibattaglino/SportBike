@@ -10,7 +10,6 @@ import { Observable } from "rxjs/RX";
 @Injectable()
 export class VendaService {
 
-  // autoincrement = 1;
   vendas: Venda[]=[];
   uri = "http://localhost:8080/vendas";
 
@@ -20,7 +19,7 @@ export class VendaService {
     let bodyString = JSON.stringify(venda);
     let cabecalho = new Headers({'Content-Type':'application/json'});
     let options = new RequestOptions({headers:cabecalho});
-    return this.http.post(this.uri+"/create", bodyString, options)
+    return this.http.post(this.uri + "/create", bodyString, options)
       .map((res:Response) => {})
       .catch((erro:any) => Observable.throw(erro));
   }
@@ -35,17 +34,21 @@ export class VendaService {
 
   getVendaPorCodigo(codigo: number): Observable<Venda>{
     // return (this.vendas.find(venda => venda.codigo == codigo));
-    return this.http.get(this.uri+codigo)
-    .map((res: Response)=> res.json())
-    .catch((erro:any)=>Observable.throw(erro));
+    let uriGetCod = this.uri + "/find/" + codigo;
+    console.log(uriGetCod);
+    return this.http.get(uriGetCod)
+      .map((res: Response)=> res.json())
+      .catch((erro:any)=>Observable.throw(erro));
   }
 
   updateVenda(codigo: number, venda: Venda): Observable<Venda>{
     // let indice = this.vendas.indexOf(this.getVendaPorCodigo(codigo), 0);
     // this.vendas[indice] = venda;
-    return this.http.put(this.uri+codigo, venda)
-    .map((res:Response)=> {})
-    .catch((erro:any)=>Observable.throw(erro))
+    let uriUp = this.uri + "/update/" + codigo;
+    console.log(uriUp);
+    return this.http.put(uriUp, venda)
+      .map((res:Response)=> {})
+      .catch((erro:any)=>Observable.throw(erro))
   }
 
   removeVenda(venda: Venda): Observable<Venda>{
@@ -53,9 +56,11 @@ export class VendaService {
     // if (indice > -1) {
     //   this.vendas.splice(indice, 1);
     // }
-    return this.http.delete(this.uri+venda.codigo)
-    .map((res:Response)=> {})
-    .catch((erro:any)=>Observable.throw(erro))
+    let uriDel = this.uri + "/delete/" + venda.codigo;
+    console.log(uriDel);
+    return this.http.delete(uriDel)
+      .map((res:Response)=> {})//pode ser igual ao motoService.ts
+      .catch((erro:any)=>Observable.throw(erro))
   }
 
 }

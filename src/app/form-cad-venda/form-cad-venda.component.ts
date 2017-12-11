@@ -74,7 +74,8 @@ export class FormCadVendaComponent implements OnInit {
     if (isNaN(this.codigo)) {
       this.venda = new Venda();
     } else {
-      this.vendaService.getVendaPorCodigo(this.codigo).subscribe(venda => { this.venda = venda;})
+      this.venda = new Venda();//talves não precise
+      this.vendaService.getVendaPorCodigo(this.codigo).subscribe(venda => { this.venda = venda;});
     }
 
     this.inicializarVenda();
@@ -84,12 +85,18 @@ export class FormCadVendaComponent implements OnInit {
   salvarVenda(){
     if (isNaN(this.codigo)) {
       this.vendaService.addVenda(this.venda).subscribe(
-        data => { this.limpar(); },
+        data => { 
+          this.limpar();
+          this.router.navigate(['/relatorio-vendas']);
+        },
         erro => { console.log(erro); }
       );
       this.inicializarVenda(); 
     } else {
-      this.vendaService.updateVenda(this.codigo, this.venda);
+      this.vendaService.updateVenda(this.codigo, this.venda).subscribe(
+        data => {this.limpar(); },
+        erro => { console.log(erro); }
+      );
     }
     this.router.navigate(['/relatorio-vendas']);
   }
@@ -98,8 +105,8 @@ export class FormCadVendaComponent implements OnInit {
     this.venda = new Venda();
     this.motoService.getMotos().subscribe(
       data => {
-        this.motos = data;
         this.limpar(); 
+        this.motos = data;
       },
       erro => { console.log(erro); }
     );
