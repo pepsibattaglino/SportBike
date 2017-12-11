@@ -38,6 +38,10 @@ export class TabMotoComponent implements OnInit {
   constructor(private service: MotoService) { }
 
   ngOnInit() {
+    this.initTab()
+  }
+
+  initTab(){
     this.service.getMotos().subscribe(
       dados => { this.motos = dados; },
       erro => { console.log(erro); }
@@ -45,7 +49,10 @@ export class TabMotoComponent implements OnInit {
   }
 
   remover(moto: Moto){
-    this.service.removeMotos(moto);
+    this.service.removeMotos(moto).subscribe(
+      dados => { this.initTab(); },
+      erro => { console.log(erro); }
+    );
   }
 
 }
