@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h1>{{titulo}}</h1>
+</div>
+<div class="row">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Cógido</th>
+          <th>Nome</th>
+          <th>Preço</th>
+          <th>Editar</th>
+          <th>Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let acessorio of acessorioss">
+          <td>{{acessorio.codigo}}</td>
+          <td>{{acessorio.nome}}</td>
+          <td>{{acessorio.preco}}</td>
+          <td>
+            <button class="btn btn-info btn-sm" data-title="Edit" [routerLink]="['/edicao-acessorios', acessorio.codigo]">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" data-title="Delete" routerLink="/relatorio-acessorios" (click)="remover(acessorio)">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -12,14 +12,20 @@ import { MotoService } from './moto.service';
 import { VendaService } from './venda.service';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FormCadAcessorioComponent } from './form-cad-acessorio/form-cad-acessorio.component';
+import { TabAcessorioComponent } from './tab-acessorio/tab-acessorio.component';
+import { AcessorioService } from 'app/acessorio.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
   { path: 'relatorio-motos', component: TabMotoComponent },
+  { path: 'relatorio-acessorios', component: TabAcessorioComponent },
   { path: 'relatorio-vendas', component: TabVendaComponent},
   { path: 'cadastro-motos', component: FormCadMotoComponent },
+  { path: 'cadastro-acessorios', component: FormCadAcessorioComponent },
   { path: 'cadastro-vendas', component: FormCadVendaComponent},
   { path: 'edicao-motos/:cod', component: FormCadMotoComponent },
+  { path: 'edicao-acessorios/:cod', component: FormCadAcessorioComponent },
   { path: 'edicao-vendas/:cod', component: FormCadVendaComponent }
 ];
 
@@ -28,9 +34,12 @@ const routes: Routes = [
     AppComponent,
     FormCadMotoComponent,
     FormCadVendaComponent,
+    FormCadAcessorioComponent,
     TabMotoComponent,
     TabVendaComponent,
-    NavbarComponent
+    TabAcessorioComponent,
+    NavbarComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -38,7 +47,7 @@ const routes: Routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [MotoService, VendaService],
+  providers: [MotoService, VendaService, AcessorioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
