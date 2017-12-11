@@ -83,7 +83,10 @@ export class FormCadMotoComponent implements OnInit {
       );
       this.limpar();  
     } else {
-      this.service.updateMoto(this.codigo, this.moto);
+      this.service.updateMoto(this.codigo, this.moto).subscribe(
+        data => { this.limpar(); },
+        erro => { console.log(erro); }
+      );
     }
     this.router.navigate(['/relatorio-motos']);
   }

@@ -35,7 +35,7 @@ export class MotoService {
 
   getMotoPorCodigo(codigo: number): Observable<Moto> {
     let uriGetCod = this.uri +"/find/"+codigo;
-    console.log("######################", uriGetCod);
+    console.log("*********", uriGetCod);
     return this.http.get(uriGetCod)
     .map((res: Response)=> res.json())
     .catch((erro:any)=>Observable.throw(erro));
@@ -44,17 +44,21 @@ export class MotoService {
   updateMoto(codigo: number, moto: Moto): Observable<Moto> {
     // let indice = this.motos.indexOf(this.getMotoPorCodigo(codigo), 0);
     // this.motos[indice] = moto;
-    let uriUp = this.uri +"/update/"+codigo;
-    return this.http.put(uriUp, moto)
-    .map((res:Response)=> {})
+    let bodyString = JSON.stringify(moto);
+    let cabecalho = new Headers({'Content-Type':'application/json'});
+    let options = new RequestOptions({headers:cabecalho});
+    let uriUp = this.uri +"/update/"+moto.codigo;
+    console.log("*********", uriUp);
+    return this.http.put(uriUp, bodyString, options)
+    .map((res:Response)=> res.json())
     .catch((erro:any)=>Observable.throw(erro))
   }
 
   removeMotos(moto: Moto): Observable<Moto>{
     let uriDel = this.uri +"/delete/"+moto.codigo;
-    console.log("***********************", uriDel)
+    console.log("*********", uriDel)
     return this.http.delete(uriDel)
-    .map((res:Response)=>res.json())
+    .map((res:Response)=> res.json())
     .catch((erro:any) => Observable.throw(erro));
     // .map((res:Response)=> {})
     // .catch((erro:any)=>Observable.throw(erro))
