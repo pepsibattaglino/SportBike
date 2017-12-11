@@ -94,11 +94,14 @@ export class FormCadVendaComponent implements OnInit {
       this.inicializarVenda(); 
     } else {
       this.vendaService.updateVenda(this.codigo, this.venda).subscribe(
-        data => {this.limpar(); },
+        data => {
+          this.limpar(); 
+          this.router.navigate(['/relatorio-vendas']);
+        },
         erro => { console.log(erro); }
       );
     }
-    this.router.navigate(['/relatorio-vendas']);
+    // this.router.navigate(['/relatorio-vendas']);
   }
 
   inicializarVenda(){

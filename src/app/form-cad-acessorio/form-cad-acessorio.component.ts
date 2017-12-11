@@ -37,11 +37,14 @@ export class FormCadAcessorioComponent implements OnInit {
       this.limpar();  
     } else {
       this.service.updateAcessorio(this.codigo, this.acessorio).subscribe(
-        data => { this.limpar(); },
+        data => { 
+          this.limpar(); 
+          this.router.navigate(['/relatorio-acessorios']);
+        },
         erro => { console.log(erro); }
       );
     }
-    this.router.navigate(['/relatorio-acessorios']);
+    // this.router.navigate(['/relatorio-acessorios']);
   }
 
   limpar(){
