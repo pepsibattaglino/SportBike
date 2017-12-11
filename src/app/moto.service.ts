@@ -46,8 +46,8 @@ export class MotoService {
     // this.motos[indice] = moto;
     let uriUp = this.uri +"/update/"+codigo;
     return this.http.put(uriUp, moto)
-    .map((res:Response)=> {})
-    .catch((erro:any)=>Observable.throw(erro))
+      .map((res:Response)=> {})
+      .catch((erro:any)=>Observable.throw(erro))
   }
 
   removeMotos(moto: Moto): Observable<Moto>{
